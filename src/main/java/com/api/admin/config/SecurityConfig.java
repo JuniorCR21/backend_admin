@@ -1,5 +1,7 @@
 package com.api.admin.config;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.api.admin.security.filters.JwtRequestFilter;
 import com.api.admin.security.models.JpaUserDetailsService;
@@ -52,22 +57,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	// Disable CSRF
-        http.csrf().disable()
+    	http.cors().and().csrf().disable()
         // Set session management to stateless
              .sessionManagement()
              .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
              .and()
          // Set unauthorized requests exception handler
-             .exceptionHandling()
-             .authenticationEntryPoint(
-                 (request, response, ex) -> {
-                     response.sendError(
-                         HttpServletResponse.SC_UNAUTHORIZED,
-                         ex.getMessage()
-                     );
-                 }
-             )
-             .and()
              .authorizeRequests()
              .antMatchers("/api/v1/users/**").permitAll()
              .antMatchers("/v2/api-docs","/api/v1/**", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html/**", "/webjars/**","/swagger-resources/configuration/ui","/swagger-ui.html").permitAll()
@@ -81,17 +76,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
               );
     }
     
-    /*Used by spring security if CORS is enabled.
     @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source =
-            new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }*/
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+        configuration.setAllowCredentials(true);
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }
