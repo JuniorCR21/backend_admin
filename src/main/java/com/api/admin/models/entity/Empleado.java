@@ -2,12 +2,8 @@ package com.api.admin.models.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
-
 import javax.persistence.*;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -16,12 +12,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="empleados")
+@Table(name = "empleados")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Empleado implements Serializable{
+public class Empleado implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
@@ -39,8 +35,9 @@ public class Empleado implements Serializable{
   public static long getSerialversionuid() {
     return serialVersionUID;
   }
+
   @PrePersist
-  public void setDatos(){
+  public void setDatos() {
     fechaRegistro = LocalDate.now();
     estaActivo = true;
   }

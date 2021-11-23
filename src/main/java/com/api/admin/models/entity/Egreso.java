@@ -1,7 +1,6 @@
 package com.api.admin.models.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
@@ -15,13 +14,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="egresos")
+@Table(name = "egresos")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Egreso implements Serializable{
-  
+public class Egreso implements Serializable {
+
   private static final long serialVersionUID = 1L;
 
   @Id
@@ -31,9 +30,8 @@ public class Egreso implements Serializable{
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime fecha;
 
-
   @ManyToOne
-  @JoinColumn(name="empleado_id",nullable = false)
+  @JoinColumn(name = "empleado_id", nullable = false)
   private Empleado empleado;
   @ManyToOne
   @JsonIgnore
@@ -45,7 +43,7 @@ public class Egreso implements Serializable{
   }
 
   @PrePersist
-  public void setDatos(){
+  public void setDatos() {
     fecha = LocalDateTime.now();
   }
 

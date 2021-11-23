@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.api.admin.models.entity.Caja;
-import com.api.admin.models.entity.Egreso;
 import com.api.admin.models.entity.Ingreso;
 import com.api.admin.services.IGestionarCajaService;
 
@@ -42,9 +41,9 @@ public class GestionarCajaController {
   }
 
   @GetMapping("{id}")
-  public ResponseEntity<?> buscarUno(@PathVariable Long id){
+  public ResponseEntity<?> buscarUno(@PathVariable Long id) {
     try {
-      return new ResponseEntity<>(_cajaService.findById(id),HttpStatus.OK);
+      return new ResponseEntity<>(_cajaService.findById(id), HttpStatus.OK);
     } catch (Exception err) {
       return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -57,7 +56,7 @@ public class GestionarCajaController {
   }
 
   @GetMapping("/filtro")
-  public ResponseEntity<List<Caja>> listarEntreFechas(String startDate, String endDate){
+  public ResponseEntity<List<Caja>> listarEntreFechas(String startDate, String endDate) {
     var cajasList = _cajaService.findAllBetween(LocalDate.parse(startDate), LocalDate.parse(endDate));
     return new ResponseEntity<>(cajasList, HttpStatus.OK);
   }

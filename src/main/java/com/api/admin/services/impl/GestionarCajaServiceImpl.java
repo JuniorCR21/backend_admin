@@ -53,7 +53,7 @@ public class GestionarCajaServiceImpl implements IGestionarCajaService {
 
   @Override
   public List<Caja> findAll() {
-    return _cajaDao.findAllByOrderByFechaDesc();
+    return _cajaDao.findAllByOrderByIdDesc();
   }
 
   @Override
@@ -107,7 +107,7 @@ public class GestionarCajaServiceImpl implements IGestionarCajaService {
   @Override
   public Egreso retirar(float monto, Long idCaja, Long idEmpleado) throws Exception {
     try {
-      if(_empleadoDao.findById(idEmpleado).isPresent()){
+      if (_empleadoDao.findById(idEmpleado).isPresent()) {
         if (_cajaDao.findByIdAndEstaAbiertaIsTrue(idCaja).isPresent()) {
           var egreso = new Egreso();
           egreso.setMonto(monto);

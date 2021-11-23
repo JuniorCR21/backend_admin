@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ICajaDao extends JpaRepository<Caja, Long> {
 
-  List<Caja> findAllByOrderByFechaDesc();
+  List<Caja> findAllByOrderByIdDesc();
 
   List<Caja> findByFechaBetween(LocalDate startDate, LocalDate endDate);
 

@@ -4,8 +4,6 @@ import com.api.admin.models.entity.Ingreso;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 /**
  * IIngresoDao
  */
