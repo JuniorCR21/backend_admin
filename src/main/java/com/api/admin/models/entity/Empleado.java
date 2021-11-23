@@ -23,6 +23,7 @@ public class Empleado implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column(name = "dni",unique=true)
   private String dni;
   private String nombre;
   private String apellido;

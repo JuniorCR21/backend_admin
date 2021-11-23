@@ -34,8 +34,9 @@ public class UsuarioController{
 	
 	@Autowired
 	private JwtUtil jwtTokenUtil;
-	
+	@GetMapping("/listar")
 	public ResponseEntity<List<Usuario>> listar() {
+		System.out.println("llega");
 		return new ResponseEntity<>(usuarioServices.findAll(), HttpStatus.OK);
 	}
 
