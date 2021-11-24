@@ -6,6 +6,7 @@ import java.util.List;
 import com.api.admin.models.entity.Caja;
 import com.api.admin.models.entity.Egreso;
 import com.api.admin.models.entity.Ingreso;
+import com.api.admin.services.IEgresoService;
 import com.api.admin.services.IGestionarCajaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class GestionarCajaController {
 
   @Autowired
   private IGestionarCajaService _cajaService;
+
+  @Autowired
+	private IEgresoService egresoService;
 
   @PostMapping
   public ResponseEntity<?> abrirCaja() {
@@ -82,4 +86,10 @@ public class GestionarCajaController {
       return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @GetMapping("/egresos")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	private List<Egreso> listarAdministradores() {
+		return egresoService.findAll();
+	}
 }
