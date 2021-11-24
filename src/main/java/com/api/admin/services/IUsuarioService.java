@@ -15,4 +15,5 @@ public interface IUsuarioService {
 	public Usuario saveToken (AuthenticationRequest request, String token);
 	public Usuario findByUsernameAndPassword(String username, String password);
 	public void deleteToken (String username);
+	public int updateUserById(String username, String token,  Long id);
 }

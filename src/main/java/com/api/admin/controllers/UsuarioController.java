@@ -8,10 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.admin.models.entity.Usuario;
@@ -39,8 +42,8 @@ public class UsuarioController{
 		System.out.println("llega");
 		return new ResponseEntity<>(usuarioServices.findAll(), HttpStatus.OK);
 	}
-
-	public ResponseEntity<Usuario> buscarPorId(Long id) {
+	@GetMapping("/findById/{id}")
+	public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<>(usuarioServices.findById(id), HttpStatus.OK);
 	}
 
@@ -58,6 +61,13 @@ public class UsuarioController{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@PutMapping("/updateById")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	private void updateSolicitudById(@RequestBody Usuario usuario) {
+		usuarioServices.updateUserById(usuario.getUsername(), usuario.getToken(), usuario.getId());
+	}
+
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> createAuthenticationToken (@RequestBody AuthenticationRequest authenticationRequest){
