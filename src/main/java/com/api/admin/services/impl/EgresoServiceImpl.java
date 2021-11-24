@@ -21,5 +21,11 @@ public class EgresoServiceImpl implements IEgresoService {
 	public List<Egreso> findAll() {
 		return (List<Egreso>) egresoDao.findAll();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Egreso> findAllOrderByFechaDesc() {
+		return egresoDao.findAllOrderByFechaDesc();
+	}
     
 }

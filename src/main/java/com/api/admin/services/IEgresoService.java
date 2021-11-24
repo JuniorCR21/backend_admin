@@ -6,4 +6,5 @@ import com.api.admin.models.entity.Egreso;
 
 public interface IEgresoService {
     public List<Egreso> findAll();
+    public List<Egreso> findAllOrderByFechaDesc();
 }

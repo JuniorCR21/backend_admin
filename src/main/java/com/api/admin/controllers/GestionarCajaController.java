@@ -8,6 +8,7 @@ import com.api.admin.models.entity.Egreso;
 import com.api.admin.models.entity.Ingreso;
 import com.api.admin.services.IEgresoService;
 import com.api.admin.services.IGestionarCajaService;
+import com.api.admin.services.IIngresosService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,9 @@ public class GestionarCajaController {
 
   @Autowired
 	private IEgresoService egresoService;
+
+  @Autowired
+	private IIngresosService ingresoService;
 
   @PostMapping
   public ResponseEntity<?> abrirCaja() {
@@ -89,7 +93,14 @@ public class GestionarCajaController {
 
   @GetMapping("/egresos")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	private List<Egreso> listarAdministradores() {
-		return egresoService.findAll();
+	private List<Egreso> listarEgresos() {
+		return egresoService.findAllOrderByFechaDesc();
+	}
+
+  @GetMapping("/ingresos")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	private List<Ingreso> listarIngresos() {
+		return ingresoService.findAllOrderByFechaDesc();
+    //return null;
 	}
 }
