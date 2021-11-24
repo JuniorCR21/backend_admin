@@ -39,7 +39,6 @@ public class UsuarioController{
 	private JwtUtil jwtTokenUtil;
 	@GetMapping("/listar")
 	public ResponseEntity<List<Usuario>> listar() {
-		System.out.println("llega");
 		return new ResponseEntity<>(usuarioServices.findAll(), HttpStatus.OK);
 	}
 	@GetMapping("/findById/{id}")
@@ -63,9 +62,10 @@ public class UsuarioController{
 	}
 
 	@PutMapping("/updateById")
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	private void updateSolicitudById(@RequestBody Usuario usuario) {
-		usuarioServices.updateUserById(usuario.getUsername(), usuario.getToken(), usuario.getId());
+	private ResponseEntity<?> updateSolicitudById(@RequestBody Usuario usuario) {
+		System.out.println("llega1");
+		usuarioServices.updateUserById(usuario.getUsername(), usuario.getId());
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	

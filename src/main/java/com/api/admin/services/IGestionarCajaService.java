@@ -20,5 +20,5 @@ public interface IGestionarCajaService {
   void cerrarCaja(Long id);
 
   Ingreso pagar(Ingreso ingreso, Long idCaja) throws Exception;
-  Egreso retirar(float monto, Long idCaja, Long idEmpleado) throws Exception;
+  Egreso retirar(Egreso egreso, Long idCaja, Long idEmpleado) throws Exception;
 }

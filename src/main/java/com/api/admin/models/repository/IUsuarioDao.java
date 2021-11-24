@@ -12,6 +12,6 @@ public interface IUsuarioDao extends JpaRepository<Usuario, Long>{
 
 	public Usuario findByUsername(String user);
 	@Modifying
-	@Query("UPDATE Usuario set username = ?1, token =?2 WHERE id = ?3")
-	int updateUserById(String username, String token,  Long id);
+	@Query("UPDATE Usuario set username = ?1 WHERE id = ?2")
+	int updateUserById(String username,  Long id);
 }

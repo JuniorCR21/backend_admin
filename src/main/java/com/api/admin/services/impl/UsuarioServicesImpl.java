@@ -102,9 +102,10 @@ public class UsuarioServicesImpl implements IUsuarioService {
 		usuarioDao.save(usuario);
 	}
 
-	@Override
-	public int updateUserById(String username, String token, Long id) {
-		return usuarioDao.updateUserById(username, token, id);
+	@Transactional
+	public int updateUserById(String username, Long id) {
+		System.out.println("llega1");
+		return usuarioDao.updateUserById(username, id);
 	}
 
 }

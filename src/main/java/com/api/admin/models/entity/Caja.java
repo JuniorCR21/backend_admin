@@ -57,6 +57,7 @@ public class Caja implements Serializable {
   }
 
   public void agregarIngreso(Ingreso ingreso) {
+    System.out.println("nombre: "+ ingreso.getNombre());
     montoCierre += ingreso.getMonto();
     ingresos.add(ingreso);
   }

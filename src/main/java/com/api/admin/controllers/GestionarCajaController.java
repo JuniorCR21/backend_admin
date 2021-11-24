@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.api.admin.models.entity.Caja;
+import com.api.admin.models.entity.Egreso;
 import com.api.admin.models.entity.Ingreso;
 import com.api.admin.services.IGestionarCajaService;
 
@@ -65,6 +66,7 @@ public class GestionarCajaController {
   public ResponseEntity<?> pagar(@RequestBody Ingreso ingreso, @PathVariable Long idCaja) {
     try {
       var pago = _cajaService.pagar(ingreso, idCaja);
+      System.out.println("fecha: "+ ingreso.getFecha());
       return new ResponseEntity<>(pago, HttpStatus.CREATED);
     } catch (Exception err) {
       return new ResponseEntity<>(err.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,9 +74,9 @@ public class GestionarCajaController {
   }
 
   @PostMapping("/retirar/{idEmpleado}/{idCaja}")
-  public ResponseEntity<?> retirar(@RequestBody float monto, @PathVariable Long idCaja, @PathVariable Long idEmpleado) {
+  public ResponseEntity<?> retirar(@RequestBody Egreso egreso,@PathVariable Long idCaja,@PathVariable Long idEmpleado) {
     try {
-      var retiro = _cajaService.retirar(monto, idCaja, idEmpleado);
+      var retiro = _cajaService.retirar(egreso, idCaja, idEmpleado);
       return new ResponseEntity<>(retiro, HttpStatus.CREATED);
     } catch (Exception err) {
       return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);

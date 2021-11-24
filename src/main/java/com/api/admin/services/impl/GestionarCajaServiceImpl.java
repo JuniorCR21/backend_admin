@@ -84,6 +84,7 @@ public class GestionarCajaServiceImpl implements IGestionarCajaService {
         var caja = _cajaDao.findByIdAndEstaAbiertaIsTrue(idCaja).get();
         if (ingreso.isMontoValido()) {
           var nuevoIngreso = new Ingreso();
+          System.out.println("nombre: "+ ingreso.getNombre());
           nuevoIngreso.setNombre(ingreso.getNombre());
           nuevoIngreso.setMonto(ingreso.getMonto());
           nuevoIngreso.setDni(ingreso.getDni());
@@ -105,12 +106,12 @@ public class GestionarCajaServiceImpl implements IGestionarCajaService {
   }
 
   @Override
-  public Egreso retirar(float monto, Long idCaja, Long idEmpleado) throws Exception {
+  public Egreso retirar(Egreso egreso, Long idCaja, Long idEmpleado) throws Exception {
     try {
       if (_empleadoDao.findById(idEmpleado).isPresent()) {
         if (_cajaDao.findByIdAndEstaAbiertaIsTrue(idCaja).isPresent()) {
-          var egreso = new Egreso();
-          egreso.setMonto(monto);
+          //var egreso = new Egreso();
+          //egreso.setMonto(monto);
           if (egreso.isMontoValido()) {
             var caja = _cajaDao.findByIdAndEstaAbiertaIsTrue(idCaja).get();
             if (caja.agregarEgreso(egreso)) {
@@ -121,7 +122,7 @@ public class GestionarCajaServiceImpl implements IGestionarCajaService {
               _cajaDao.save(caja);
               return egreso;
             }
-            throw new Exception("Monto es mayor al saldo disponible");
+            throw new Exception("Monto es mayor o igual al saldo disponible");
           }
           throw new Exception("Monto no es valido");
         }

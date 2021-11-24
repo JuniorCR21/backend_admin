@@ -27,6 +27,7 @@ public class Egreso implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private float monto;
+  private String detalles;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime fecha;
 
