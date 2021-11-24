@@ -8,6 +8,7 @@ import java.util.List;
 public interface IEmpleadoService {
     List<Empleado> findAll();
     Empleado findByDni(String dni);
+    Empleado findById(Long id);
     Empleado save(Empleado empleado);
     boolean delete(Long id);
     boolean update(Empleado empleado);

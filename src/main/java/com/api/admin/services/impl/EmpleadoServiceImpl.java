@@ -25,6 +25,11 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     }
 
     @Override
+    public Empleado findById(Long id) {
+        return _empleadoDao.findById(id).orElse(null);
+    }
+
+    @Override
     public Empleado save(Empleado empleado) {
         return _empleadoDao.save(empleado);
     }

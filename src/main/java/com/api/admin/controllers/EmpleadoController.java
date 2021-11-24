@@ -73,4 +73,10 @@ public class EmpleadoController {
             return new ResponseEntity<>(err,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/findById/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	private Empleado findAdministradorById(@PathVariable Long id) {
+		return _empleadoServices.findById(id);
+	}
 }
