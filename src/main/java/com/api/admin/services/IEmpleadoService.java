@@ -11,4 +11,5 @@ public interface IEmpleadoService {
     Empleado save(Empleado empleado);
     boolean delete(Long id);
     boolean update(Empleado empleado);
+    boolean activar(Long id);
 }

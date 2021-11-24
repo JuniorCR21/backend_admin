@@ -41,6 +41,17 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     }
 
     @Override
+    public boolean activar(Long id) {
+        if(_empleadoDao.findById(id).isPresent()){
+            var empleado = _empleadoDao.findById(id).get();
+            empleado.setEstaActivo(true);
+            _empleadoDao.save(empleado);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean update(Empleado empleado) {
         if(_empleadoDao.findByIdAndEstaActivoIsTrue(empleado.getId()).isPresent()){
             _empleadoDao.save(empleado);

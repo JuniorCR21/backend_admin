@@ -59,6 +59,18 @@ public class EmpleadoController {
         catch(Exception err){
             return new ResponseEntity<>(err,HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
 
+    @DeleteMapping("/activar/{id}")
+    public ResponseEntity<?> activar(@PathVariable("id") Long id){
+        try {
+            if(_empleadoServices.activar(id)){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            throw new Exception("No se pudo eliminar");
+        }
+        catch(Exception err){
+            return new ResponseEntity<>(err,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
