@@ -13,7 +13,7 @@ public interface ICajaDao extends JpaRepository<Caja, Long> {
 
   List<Caja> findByFechaBetween(LocalDate startDate, LocalDate endDate);
 
-  Caja findTopByOrderByFechaDesc();
+  Caja findTopByOrderByIdDesc();
 
   Optional<Caja> findTopByEstaAbiertaIsTrue();
 

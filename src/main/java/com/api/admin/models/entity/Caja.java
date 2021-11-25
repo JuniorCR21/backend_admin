@@ -49,7 +49,6 @@ public class Caja implements Serializable {
     fecha = LocalDate.now();
     horaApertura = LocalTime.now();
     estaAbierta = true;
-    montoCierre = montoApertura;
   }
 
   public static long getSerialversionuid() {

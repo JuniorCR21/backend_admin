@@ -35,14 +35,15 @@ public class GestionarCajaServiceImpl implements IGestionarCajaService {
       if (hayCajaAbierta) {
         throw new Exception("Hay una caja abierta");
       } else {
-        var ultimaCaja = _cajaDao.findTopByOrderByFechaDesc();
+        var ultimaCaja = _cajaDao.findTopByOrderByIdDesc();
         var nuevaCaja = new Caja();
 
         if (ultimaCaja == null) {
-          nuevaCaja.setMontoApertura(0f);
+          nuevaCaja.setMontoCierre(0f);
         } else {
-          nuevaCaja.setMontoApertura(ultimaCaja.getMontoCierre());
+          nuevaCaja.setMontoCierre(ultimaCaja.getMontoCierre());
         }
+        nuevaCaja.setMontoApertura(0f);
         return _cajaDao.save(nuevaCaja);
       }
     } catch (Exception err) {
